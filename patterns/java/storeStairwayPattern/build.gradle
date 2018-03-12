@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.1"
+    }
+}
+
+//$ gradle shadowJar
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'java'
+//apply plugin: 'java-library'
+
+allprojects {
+    // apply plugin: 'java'
+    apply plugin: 'idea'
+
+    // gradle publishToMavenLocal
+    apply plugin: 'maven-publish'
+
+    group = 'com.github.jalbertcruz'
+    version = '0.0.1-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    //$ gradle cleanIdea idea
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
+
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+dependencies {
+
+    implementation project(':datastore-api')
+
+    if (project.store == 'DynamoDb')
+        implementation project(':datastore-impl:dynamodb')
+    else
+        implementation project(':datastore-impl:cassandra')
+
+}
+
+task runApp(type: JavaExec) {
+    main = "com.Main"
+    classpath = sourceSets.main.runtimeClasspath
+}

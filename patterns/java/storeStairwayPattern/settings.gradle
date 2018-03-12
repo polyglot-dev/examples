@@ -1,0 +1,9 @@
+rootProject.name = 'The Stairway pattern'
+
+include 'datastore-api'
+
+include 'datastore-impl:dynamodb'
+
+include 'datastore-impl:cassandra'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')

@@ -1,0 +1,18 @@
+apply plugin: 'java-library'
+
+project(':datastore-impl:dynamodb') {
+    dependencies {
+        api project(':datastore-api')
+
+        implementation group: 'com.lightbend.akka', name: 'akka-stream-alpakka-dynamodb_2.12', version: project.alpakkaVersion
+        implementation group: 'org.scala-lang.modules', name: 'scala-java8-compat_2.12', version: '0.8.0'
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

@@ -1,0 +1,17 @@
+The Stairway pattern
+====================
+
+Demo implementation of the pattern described in *Adaptive Code, Agile coding with design patterns and
+SOLID principles (2nd Ed, 2017)* page 326 (using Java and Gradle).
+
+Using two implementation of a data access layer to data in DynamoDb or Cassandra, the activation of
+the implementation is by puting:
+
+
+    # Posible values: Cassandra/DynamoDb
+    store=DynamoDb
+
+
+in gradle.properties
+
+

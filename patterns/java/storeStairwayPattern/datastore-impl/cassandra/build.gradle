@@ -1,0 +1,17 @@
+apply plugin: 'java-library'
+
+project(':datastore-impl:cassandra') {
+    dependencies {
+        api project(':datastore-api')
+
+        implementation group: 'com.lightbend.akka', name: 'akka-stream-alpakka-cassandra_2.12', version: project.alpakkaVersion
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
